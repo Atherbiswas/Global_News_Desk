@@ -4,7 +4,7 @@
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
-body{
+.bg{
     background-color: #F6F6F6;
 }
 .author{
@@ -17,6 +17,6 @@ body{
     height: 40px;
     border-radius: 50%;
 }
-.news-container-bg{
-    background-color: #F6F6F6;
+.ctg-length{
+    background-color: #FFFFFF;
 }

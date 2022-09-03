@@ -24,22 +24,21 @@ const loadPerCategoryNews = (category_id) => {
     .then(data => displayPercategoryNews(data?.data))
     
 }
+//display every category from api
 const displayPercategoryNews = category => {
   const categoryLength = document.getElementById('category-length');
   categoryLength.innerHTML = `
-  <h5 class="text-info fw-bold">${category.length}&nbsp;items for this Category</h5>
+  <h5 class="text-info fw-bold ctg-length p-3">${category.length}&nbsp;items for this Category</h5>
   `;
-
-  //start loder spinner  
+//start loder spinner  
   toggleSpinner(true);
     const newscontainer = document.getElementById('news-container');
     newscontainer.innerHTML = '';
     category.forEach(item => {
-        console.log(item)
         const {image_url, title , details, author, total_view} = item;
         const newsDiv = document.createElement('div');
         newsDiv.innerHTML = `
-        <div class="card mb-3 border border-0">
+        <div class="card mb-3 border border-0 shadow">
   <div class="row g-0">
     <div class="col-md-4">
       <img src="${image_url}" class="img-fluid rounded-start" alt="...">
@@ -47,7 +46,7 @@ const displayPercategoryNews = category => {
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title fw-bolder">${title}</h5>
-        <p class="card-text">${details.length > 338 ? details.slice(0, 338) + '(...)' : details}</p>
+        <p class="card-text">${details.length > 338 ? details.slice(0, 338) + '....' : details}</p>
         <div class="row gap-4 mt-2">
             <div class="col-12 col-md-3">
             <img src="${author.img}" class="author-img" alt="...">&nbsp;&nbsp;
@@ -75,13 +74,14 @@ const displayPercategoryNews = category => {
 //stop loder spinner
   toggleSpinner(false);
 }
-//show details with news id by modal...
+//Load news data details with news id by modal...
 const loadDetailsNews = async news_id => {
   const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
   const res = await fetch(url);
   const data = await res.json();
   displayDetailsNews(data.data[0]);
 }
+//display news data by news id 
 const displayDetailsNews = item => {
   console.log(item)
   const newsTiltle = document.getElementById('detailsNewsLabel');
