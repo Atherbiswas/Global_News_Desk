@@ -91,7 +91,7 @@ const displayDetailsNews = item => {
   <img src="${item.image_url}" class="img-fluid rounded-start" alt="...">
   <p class="card-text">${item.details}</p>
   <img src="${item.author.img}" class="author-img" alt="...">
-  <p>${item.author.name ? item.author.name : 'Data not found'}</p>
+  <p>${item.author.name ? item.author.name : 'Autor name not found'}</p>
   <p>${item.author.published_date ? item.author.published_date : 'Date not available'}</p>
   <p>
     <span>
