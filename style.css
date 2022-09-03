@@ -9,5 +9,14 @@ body{
 }
 .author{
     display: flex;
-    align-items: center
+    justify-content: space-between;
+    align-items: center;
+}
+.author-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.news-container-bg{
+    background-color: #F6F6F6;
 }
