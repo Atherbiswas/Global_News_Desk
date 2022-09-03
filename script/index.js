@@ -46,16 +46,16 @@ const displayPercategoryNews = category => {
         <div class="row gap-4 mt-2">
             <div class="col-12 col-md-3">
             <img src="${author.img}" class="author-img" alt="...">&nbsp;&nbsp;
-            <p>${author.name ? author.name : 'autor'}</p>
+            <p>${author.name ? author.name : 'Data not found'}</p>
             </div>
             <div class="col-12 col-md-3 mt-4">
             <p><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-          </svg>&nbsp;</span>${total_view}</p>
+          </svg>&nbsp;</span>${total_view ? total_view : 'No views'}</p>
             </div>
             <div class="col-12 col-md-3 text-end">
-            <button type="button" class="btn btn-info mt-4">Details News <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <button type="button" onclick="loadDetailsNews('${item._id}')" class="btn btn-info mt-4" data-bs-toggle="modal" data-bs-target="#detailsNews">Details News <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
           </svg></span></button>
             </div>
@@ -67,5 +67,33 @@ const displayPercategoryNews = category => {
     `;
     newscontainer.appendChild(newsDiv);
 })    
+}
+//show details with news id...
+const loadDetailsNews = async news_id => {
+  const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayDetailsNews(data.data[0]);
+}
+const displayDetailsNews = item => {
+  console.log(item)
+  const newsTiltle = document.getElementById('detailsNewsLabel');
+  newsTiltle.innerText = item.title;
+  const newsBody = document.getElementById('news-body');
+  newsBody.innerHTML = `
+  <img src="${item.image_url}" class="img-fluid rounded-start" alt="...">
+  <p class="card-text">${item.details}</p>
+  <img src="${item.author.img}" class="author-img" alt="...">
+  <p>${item.author.name ? item.author.name : 'Data not found'}</p>
+  <p>${item.author.published_date ? item.author.published_date : 'Date not available'}</p>
+  <p>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+      </svg>&nbsp;
+    </span>${item.total_view ? item.total_view : 'No views'}
+  </p>
+  `;
 }
 loadAllCategory();
