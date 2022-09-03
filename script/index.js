@@ -7,7 +7,6 @@ const loadAllCategory = () =>{
 // Display to Ui all category list...
 const displayAllCategory = categories => {
     categories.forEach(category => {
-        // console.log('amar data',category)
         const allCategory = document.getElementById('all-category');
         const li = document.createElement('li');
         li.classList.add('nav-item')
@@ -15,7 +14,6 @@ const displayAllCategory = categories => {
         <a class="nav-link active p-2 mx-3 fs-5 text-black-50 fw-semibold" aria-current="page" onclick="loadPerCategoryNews('${category.category_id}')" href="#">${category.category_name}</a>
         `;
         allCategory.appendChild(li);
-        // console.log('amar data', category.category_id )
     })
 }
 // Every category load news from api...
@@ -27,7 +25,10 @@ const loadPerCategoryNews = (category_id) => {
     
 }
 const displayPercategoryNews = category => {
-  // console.log(category.length)
+  const categoryLength = document.getElementById('category-length');
+  categoryLength.innerHTML = `
+  <h5 class="text-info fw-bold">${category.length}&nbsp;items for this Category</h5>
+  `;
 
   //start loder spinner  
   toggleSpinner(true);
@@ -50,7 +51,7 @@ const displayPercategoryNews = category => {
         <div class="row gap-4 mt-2">
             <div class="col-12 col-md-3">
             <img src="${author.img}" class="author-img" alt="...">&nbsp;&nbsp;
-            <p>${author.name ? author.name : 'Data not found'}</p>
+            <p>${author.name ? author.name : 'Autor name not found'}</p>
             </div>
             <div class="col-12 col-md-3 mt-4">
             <p><span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
