@@ -28,7 +28,7 @@ const loadPerCategoryNews = (category_id) => {
 const displayPercategoryNews = category => {
   const categoryLength = document.getElementById('category-length');
   categoryLength.innerHTML = `
-  <h5 class="text-info fw-bold ctg-length p-3">${category.length}&nbsp;items for this Category</h5>
+  <h5 class="text-info fw-bold ctg-length p-3">${category.length}&nbsp;items news for this Category</h5>
   `;
 //start loder spinner  
   toggleSpinner(true);
